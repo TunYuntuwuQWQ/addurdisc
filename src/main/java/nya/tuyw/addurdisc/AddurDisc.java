@@ -21,12 +21,11 @@ public class AddurDisc {
     public static final String MODID = "addurdisc";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, AddurDisc.MODID);
-    private static final Pattern CHINESE_PATTERN = Pattern.compile("[\u4e00-\u9fa5]");
     private static List<File> sounds;
     private static List<String> loadedSounds;
 
-    public static boolean containsChinese(String str) {
-        return CHINESE_PATTERN.matcher(str).find();
+    public static boolean checkFileName(String str) {
+        return Pattern.compile("[a-z0-9/._-]").matcher(str).find();
     }
     private static void registerSounds() {
         for (String soundName : loadedSounds) {
@@ -36,6 +35,7 @@ public class AddurDisc {
     }
     private static void initializeSounds() {
         sounds = new ArrayList<>();
+
         loadedSounds = new ArrayList<>();
         File dir = FMLPaths.GAMEDIR.get().resolve("addurdisc").toFile();
         if (!dir.exists()) {
@@ -49,15 +49,15 @@ public class AddurDisc {
             LOGGER.debug("Existing files:");
             for (File f : files) {
                 LOGGER.debug(dir.getName() + "/" + f.getName());
-                if (f.getName().endsWith(".ogg") && !containsChinese(f.getName())){
+                if (f.getName().endsWith(".ogg") && checkFileName(f.getName())){
                     sounds.add(f);
                     loadedSounds.add(f.getName().substring(0,f.getName().lastIndexOf('.')));
                 }else {
                     if (!f.getName().endsWith(".ogg")){
                         LOGGER.warn(f.getName() + " is not a valid sound file (not ending with .ogg). Ignoring.");
                     }
-                    if (containsChinese(f.getName())){
-                        LOGGER.warn(f.getName() + " contains Chinese characters. Ignoring.");
+                    if (!checkFileName(f.getName())){
+                        LOGGER.warn(f.getName() + " contains illegal characters. Ignoring.");
                     }
                 }
             }
