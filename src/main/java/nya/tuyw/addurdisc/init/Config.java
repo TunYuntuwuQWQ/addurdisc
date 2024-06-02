@@ -1,13 +1,15 @@
 package nya.tuyw.addurdisc.init;
 
+import com.electronwill.nightconfig.core.file.CommentedFileConfig;
+import com.electronwill.nightconfig.core.io.WritingMode;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-import java.io.File;
+import java.nio.file.Path;
 
 public class Config {
     public static final ForgeConfigSpec CFG;
-    private static final ForgeConfigSpec.ConfigValue<String> customPath;
-    private static final ForgeConfigSpec.ConfigValue<String> custompathname;
+    public static final ForgeConfigSpec.ConfigValue<String> customPath;
+    public static final ForgeConfigSpec.ConfigValue<String> custompathname;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -20,18 +22,15 @@ public class Config {
         builder.pop();
         CFG = builder.build();
     }
+    public static void loadmyConfig(ForgeConfigSpec spec, Path path) {
 
-    private static final File normalDir = new File(customPath.get());
-    private static final String resourceName = custompathname.get();
-    private static final File resourceDir = normalDir.toPath().resolve(resourceName).toFile();
+        final CommentedFileConfig configData = CommentedFileConfig.builder(path)
+                .sync()
+                .autosave()
+                .writingMode(WritingMode.REPLACE)
+                .build();
 
-    public static File getNormalDir(){
-        return normalDir;
-    }
-    public static String getResourceName(){
-        return resourceName;
-    }
-    public static File getResourceDir(){
-        return resourceDir;
+        configData.load();
+        spec.setConfig(configData);
     }
 }

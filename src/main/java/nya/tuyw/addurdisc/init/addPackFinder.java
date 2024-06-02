@@ -11,7 +11,7 @@ import nya.tuyw.addurdisc.AddurDisc;
 public class addPackFinder {
     @SubscribeEvent
     public static void newpackfinder(AddPackFindersEvent event){
-        event.addRepositorySource(new myRepositorySource(Config.getNormalDir().toPath(), PackType.CLIENT_RESOURCES, PackSource.BUILT_IN));
+        event.addRepositorySource(new myRepositorySource(ConfigUtil.getNormalPath(), PackType.CLIENT_RESOURCES, PackSource.BUILT_IN));
         AddurDisc.LOGGER.debug("addurdisc's resourcespath added");
     }
 }
