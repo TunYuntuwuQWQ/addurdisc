@@ -5,8 +5,8 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
-import nya.tuyw.addurdisc.init.Config;
-import nya.tuyw.addurdisc.init.ConfigUtil;
+import nya.tuyw.addurdisc.Config.Config;
+import nya.tuyw.addurdisc.Config.ConfigUtil;
 import nya.tuyw.addurdisc.init.ModInitialize;
 import org.slf4j.Logger;
 
@@ -27,8 +27,23 @@ public class AddurDisc {
         ConfigUtil.setResourceName(Config.custompathname.get());
         ConfigUtil.setResourcePath(ConfigUtil.getNormalPath().resolve(ConfigUtil.getResourceName()));
 
+        new ModInitialize();
 
-        ModInitialize.initializePackmcmeta();
-        ModInitialize.initializeSounds();
+//        ModInitialize.initializeSounds();
+//        ModInitialize.initializeDiscItems();
+
+//        BufferedImage image = null;
+//        try {
+//            image = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("custom.png")));
+//            LOGGER.debug("readdded"+image.toString());
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
+//        try {
+//            ImageIO.write(image,"PNG",ModInitialize.textures.resolve("cous.png").toFile());
+//            LOGGER.debug("writeeeen");
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
     }
 }

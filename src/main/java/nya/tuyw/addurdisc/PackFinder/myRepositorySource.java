@@ -1,4 +1,4 @@
-package nya.tuyw.addurdisc.init;
+package nya.tuyw.addurdisc.PackFinder;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.FileUtil;

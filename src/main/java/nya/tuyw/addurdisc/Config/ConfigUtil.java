@@ -1,4 +1,4 @@
-package nya.tuyw.addurdisc.init;
+package nya.tuyw.addurdisc.Config;
 
 import net.minecraftforge.fml.loading.FMLPaths;
 

@@ -1,4 +1,4 @@
-package nya.tuyw.addurdisc.init;
+package nya.tuyw.addurdisc.Config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
