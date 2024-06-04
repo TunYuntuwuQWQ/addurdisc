@@ -28,22 +28,5 @@ public class AddurDisc {
         ConfigUtil.setResourcePath(ConfigUtil.getNormalPath().resolve(ConfigUtil.getResourceName()));
 
         new ModInitialize();
-
-//        ModInitialize.initializeSounds();
-//        ModInitialize.initializeDiscItems();
-
-//        BufferedImage image = null;
-//        try {
-//            image = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("custom.png")));
-//            LOGGER.debug("readdded"+image.toString());
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
-//        try {
-//            ImageIO.write(image,"PNG",ModInitialize.textures.resolve("cous.png").toFile());
-//            LOGGER.debug("writeeeen");
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
     }
 }

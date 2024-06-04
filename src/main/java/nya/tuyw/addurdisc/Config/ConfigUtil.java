@@ -8,6 +8,7 @@ public class ConfigUtil {
     private static Path normalPath = FMLPaths.GAMEDIR.get();
     private static String resourceName = null;
     private static Path resourcePath = null;
+    private static Boolean candropbycreeper = Config.canDropbycreeper.get();
 
     public static Path getNormalPath(){
         return normalPath;
@@ -27,4 +28,5 @@ public class ConfigUtil {
     public static void setResourcePath(Path path){
         resourcePath = path;
     }
+    public static Boolean getDropbycreeper(){return candropbycreeper;}
 }

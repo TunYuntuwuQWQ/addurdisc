@@ -35,7 +35,7 @@ public class Generater {
     public static void GenModelsjson(Path path,ArrayList<String> names){
         names.forEach((name)->{
             File f = path.resolve("disc_"+name+".json").toFile();
-            String js = "{\"parent\":\"item/generated\",\"textures\":{\"layer0\":\"addurdisc:disc_"+name+"\"}}";
+            String js = "{\"parent\":\"item/generated\",\"textures\":{\"layer0\":\"addurdisc:item/disc_"+name+"\"}}";
             writein(f.toString(),js);
         });
     }
@@ -53,9 +53,6 @@ public class Generater {
             }
         }
         langjson.append("}");
-//        if (f.exists()) {
-//            f.delete();
-//        }
         writein(f.toString(),langjson.toString());
     }
     public static void GenPackmcmeta(Path path){
@@ -76,10 +73,21 @@ public class Generater {
             }
         }
         jsonBuilder.append("}");
-
-//        if (f.exists()) {
-//            f.delete();
-//        }
         writein(f.toString(),jsonBuilder.toString());
+    }
+    public static void GenItemTags(Path path,ArrayList<String> names){
+        File f = path.toFile();
+        StringBuilder datajson = new StringBuilder("{\"values\":[");
+        if (names != null && !names.isEmpty()) {
+            for (int i = 0; i < names.size(); i++) {
+                String name = names.get(i);
+                datajson.append("\"addurdisc:disc_").append(name).append("\"");
+                if (i < names.size() - 1) {
+                    datajson.append("\n,");
+                }
+            }
+        }
+        datajson.append("]}");
+        writein(f.toString(),datajson.toString());
     }
 }

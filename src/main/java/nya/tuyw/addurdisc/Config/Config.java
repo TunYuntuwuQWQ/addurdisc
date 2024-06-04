@@ -10,6 +10,7 @@ public class Config {
     public static final ForgeConfigSpec CFG;
     public static final ForgeConfigSpec.ConfigValue<String> customPath;
     public static final ForgeConfigSpec.ConfigValue<String> custompathname;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> canDropbycreeper;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -19,6 +20,8 @@ public class Config {
                 "example2: .minecraft/logs/addurdisc/ = \"logs/addurdisc\"").define("CustomPath","");
         custompathname = builder.comment("You can customize the resource path name",
                 "default : .addurdisc").define("CustomPathName",".addurdisc");
+        canDropbycreeper = builder.comment("You can change this option to control whether discs can be dropped by creeper.(true or false)","default : true")
+                        .define("CanDropByCreeper",true);
         builder.pop();
         CFG = builder.build();
     }
