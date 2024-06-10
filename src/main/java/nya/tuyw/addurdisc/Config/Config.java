@@ -11,6 +11,7 @@ public class Config {
     public static final ForgeConfigSpec.ConfigValue<String> customPath;
     public static final ForgeConfigSpec.ConfigValue<String> custompathname;
     public static final ForgeConfigSpec.ConfigValue<Boolean> canDropbycreeper;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> doRefreshLang;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -22,6 +23,8 @@ public class Config {
                 "default : .addurdisc").define("CustomPathName",".addurdisc");
         canDropbycreeper = builder.comment("You can change this option to control whether discs can be dropped by creeper.(true or false)","default : true")
                         .define("CanDropByCreeper",true);
+        doRefreshLang = builder.comment("Changing this option so that en_us.json doesn't reset on startup,","which can help you change the name and description of the record","default : true")
+                        .define("refreshLang",true);
         builder.pop();
         CFG = builder.build();
     }

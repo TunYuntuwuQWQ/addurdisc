@@ -11,7 +11,6 @@ pluginManagement {
 
 plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.7.0'
-//    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
 rootProject.name = 'addurdisc'

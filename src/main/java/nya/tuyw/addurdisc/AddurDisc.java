@@ -24,7 +24,9 @@ public class AddurDisc {
             ConfigUtil.setNormalPath(new File((Config.customPath.get())+"/").toPath());
         }
         LOGGER.debug("custom path now :"+ConfigUtil.getNormalPath().toString());
-        ConfigUtil.setResourceName(Config.custompathname.get());
+        if (!Config.custompathname.get().isEmpty()){
+            ConfigUtil.setResourceName(Config.custompathname.get());
+        }
         ConfigUtil.setResourcePath(ConfigUtil.getNormalPath().resolve(ConfigUtil.getResourceName()));
 
         new ModInitialize();

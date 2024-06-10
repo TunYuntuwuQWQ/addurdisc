@@ -74,26 +74,31 @@ public class ModInitialize {
             AddurDisc.LOGGER.debug("Existing files:");
             for (File f : files) {
                 AddurDisc.LOGGER.debug(dir.getName() + "/" + f.getName());
-                if (f.getName().endsWith(".ogg") && checkFileName(f.getName())) {
-                    String names = f.getName().substring(0, f.getName().lastIndexOf('.'));
-                    loadedSounds.add(names);
-                } else {
-                    if (!f.getName().endsWith(".ogg")) {
-                        AddurDisc.LOGGER.warn(f.getName() + " is not a valid sound file (not ending with .ogg). Ignoring.");
-                    }
-                    if (!checkFileName(f.getName())) {
+                if (f.getName().endsWith(".ogg")) {
+                    if (checkFileName(f.getName())){
+                        String names = f.getName().substring(0, f.getName().lastIndexOf('.'));
+                        loadedSounds.add(names);
+                    }else {
                         AddurDisc.LOGGER.warn(f.getName() + " contains illegal characters. Ignoring.");
                     }
+                } else {
+                    AddurDisc.LOGGER.warn(f.getName() + " is not a valid sound file (not ending with .ogg). Ignoring.");
                 }
             }
             Generater.GenSoundsjson(path, loadedSounds);
-            Generater.GenLangjson(lang,loadedSounds);
             Generater.GenTexturepng(Stream,textures,loadedSounds);
             Generater.GenModelsjson(models,loadedSounds);
+            if (ConfigUtil.getDorefreshlang()){
+                Generater.GenLangjson(lang,loadedSounds);
+            } else {
+                AddurDisc.LOGGER.debug("refreshLang:false,will not refresh the en_us.json");
+            }
             if (ConfigUtil.getDropbycreeper()){
                 Generater.GenItemTags(data.resolve("creeper_drop_music_discs.json"),loadedSounds);
+                deleteFile(data.resolve("music_disc.json").toFile());
             }else {
                 Generater.GenItemTags(data.resolve("music_discs.json"),loadedSounds);
+                deleteFile(data.resolve("creeper_drop_music_discs.json").toFile());
             }
             AddurDisc.LOGGER.debug("Loaded files:" + loadedSounds);
             AddurDisc.LOGGER.debug("Sounds are all ready");
@@ -156,12 +161,17 @@ public class ModInitialize {
     }
 
     private static boolean checkFileName(String str) {
-        return Pattern.compile("[a-z0-9/._-]").matcher(str).find();
+        return Pattern.compile("^[a-z0-9._-]+$").matcher(str).find();
     }
 
     private static void checkResourcesPath(Path p) {
         if (!p.toFile().exists()) {
             p.toFile().mkdirs();
+        }
+    }
+    private static void deleteFile(File f){
+        if (f.exists()){
+            f.delete();
         }
     }
 }

@@ -22,7 +22,7 @@ group = mod_group_id
 version = mod_version
 
 base {
-    archivesName = "$mod_id-Forge-$minecraft_version"
+    archivesName = "$mod_name-Forge-1.20.x"
 }
 
 java {
