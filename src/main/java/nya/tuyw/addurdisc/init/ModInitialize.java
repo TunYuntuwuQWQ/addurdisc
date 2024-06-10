@@ -65,22 +65,25 @@ public class ModInitialize {
             AddurDisc.LOGGER.debug("Existing files:");
             for (File f : files) {
                 AddurDisc.LOGGER.debug(dir.getName() + "/" + f.getName());
-                if (f.getName().endsWith(".ogg") && checkFileName(f.getName())) {
-                    String names = f.getName().substring(0, f.getName().lastIndexOf('.'));
-                    loadedSoundsNames.add(names);
-                } else {
-                    if (!f.getName().endsWith(".ogg")) {
-                        AddurDisc.LOGGER.warn(f.getName() + " is not a valid sound file (not ending with .ogg). Ignoring.");
-                    }
-                    if (!checkFileName(f.getName())) {
+                if (f.getName().endsWith(".ogg")) {
+                    if (checkFileName(f.getName())){
+                        String names = f.getName().substring(0, f.getName().lastIndexOf('.'));
+                        loadedSoundsNames.add(names);
+                    }else {
                         AddurDisc.LOGGER.warn(f.getName() + " contains illegal characters. Ignoring.");
                     }
+                } else {
+                    AddurDisc.LOGGER.warn(f.getName() + " is not a valid sound file (not ending with .ogg). Ignoring.");
                 }
             }
             Generater.GenSoundsjson(path, loadedSoundsNames);
-            Generater.GenLangjson(lang, loadedSoundsNames);
             Generater.GenTexturepng(Stream,textures, loadedSoundsNames);
             Generater.GenModelsjson(models, loadedSoundsNames);
+            if (ConfigUtil.getrefreshlang()){
+                Generater.GenLangjson(lang, loadedSoundsNames);
+            }else {
+                AddurDisc.LOGGER.debug("refreshLang:false,will not refresh the en_us.json");
+            }
             if (ConfigUtil.getDropbycreeper()){
                 deleteFile(data.resolve("music_disc.json").toFile());
                 Generater.GenItemTags(data.resolve("creeper_drop_music_discs.json"), loadedSoundsNames);
@@ -134,7 +137,7 @@ public class ModInitialize {
     }
 
     private static boolean checkFileName(String str) {
-        return Pattern.compile("[a-z0-9/._-]").matcher(str).find();
+        return Pattern.compile("^[a-z0-9._-]+$").matcher(str).find();
     }
 
     private static void checkResourcesPath(Path p) {

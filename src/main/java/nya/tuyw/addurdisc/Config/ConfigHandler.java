@@ -25,7 +25,6 @@ public class ConfigHandler {
         config = new Config();
         String json = GSON.toJson(config);
         try (FileWriter writer = new FileWriter(CONFIG_FILE)) {
-            // 将 JSON 写入配置文件
             writer.write(json);
         } catch (IOException e) {
             e.printStackTrace();

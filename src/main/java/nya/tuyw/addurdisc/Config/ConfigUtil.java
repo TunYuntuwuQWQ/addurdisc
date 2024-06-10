@@ -9,7 +9,8 @@ import java.nio.file.Path;
 public class ConfigUtil {
     private static String path;
     private static String pathname;
-    private static Boolean dropbycreeper;
+    private static boolean dropbycreeper;
+    private static boolean refreshlang;
     public ConfigUtil() {
         refreshConfig();
     }
@@ -17,6 +18,7 @@ public class ConfigUtil {
         Config config = ConfigHandler.getConfig();
         pathname = config.customPathName;
         dropbycreeper = config.canDropByCreeper;
+        refreshlang = config.refreshLang;
         if (config.customPath.isEmpty()){
             path = FabricLoader.getInstance().getGameDir().toString();
         }else {
@@ -33,7 +35,8 @@ public class ConfigUtil {
     public static Path getResourcePath(){
         return getNormalPath().resolve(getResourceName());
     }
-    public static Boolean getDropbycreeper(){
+    public static boolean getDropbycreeper(){
         return dropbycreeper;
     }
+    public static boolean getrefreshlang(){return refreshlang;}
 }
