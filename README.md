@@ -1,3 +1,6 @@
+# addurdisc
+Customize your own music discs.
+
 This mod can help you add your own discs.
 Put the ogg audio file in /.minecraft/.addurdisc/assets/addurdisc/sounds/ 
 and the file name does not contain characters other than lowercase letters、numbers、-._ 
