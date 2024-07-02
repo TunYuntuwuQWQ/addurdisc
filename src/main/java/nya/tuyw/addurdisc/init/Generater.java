@@ -46,7 +46,7 @@ public class Generater {
             for (int i = 0; i < names.size(); i++) {
                 String name = names.get(i);
                 langjson.append("\"item.addurdisc.disc_").append(name).append("\":\"MusicDisc-").append(name)
-                        .append("\",\"item.addurdisc.disc_").append(name).append(".desc\":\"").append(name).append("--added by 'addurdisc'\"");
+                        .append("\",\"item.addurdisc.disc_").append(name).append(".desc\":\"").append(name).append(" - added by 'addurdisc'\"");
                 if (i < names.size() - 1) {
                     langjson.append(",\n");
                 }
